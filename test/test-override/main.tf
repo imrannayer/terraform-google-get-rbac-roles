@@ -15,7 +15,7 @@
  */
 
 module "get_iam_bindings" {
-  source                    = "../"
+  source                    = "../../"
   groups_users_roles_needed = var.groups_users_roles_needed
 
   custom_iam_role_bindings = var.custom_iam_role_bindings
