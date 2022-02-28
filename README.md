@@ -69,7 +69,7 @@ Here is an example input
 ```
 
 ## custom_iam_role_bindings
-Users can also pass values in `custom_iam_role_bindings` which is merged with `central_iam_role_bindings` before generating final bindings. It will allow users take advantage of formatting this module can perform. If a user passes `custom_iam_role_bindings` with job function(s) which are already present in `central_iam_role_bindings` it will override if the value of `override_bindings` is set to `true` otherwise the matching job function(s) will be ignored. In this example since the value of `override_bindings` is set to true, if `dba` or `sandbox` role is already present in `central_iam_role_bindings` it will be overridden. 
+Users can also pass values in `custom_iam_role_bindings` which is merged with `predefined_iam_role_bindings` before generating final bindings. It will allow users take advantage of formatting this module can perform. If a user passes `custom_iam_role_bindings` with job function(s) which are already present in `predefined_iam_role_bindings` it will override if the value of `override_bindings` is set to `true` otherwise the matching job function(s) will be ignored. In this example since the value of `override_bindings` is set to true, if `dba` or `sandbox` role is already present in `predefined_iam_role_bindings` it will be overridden. 
 
 ```terraform
 module "get_iam_bindings" {
@@ -97,10 +97,10 @@ module "get_iam_bindings" {
 
 ## How to add or remove mapping in this module
 
-Mapping is defined in the `job-roles.tf` file in a local variable `central_iam_role_bindings`. You can add or remove job functions or predefined roles from a job function. Here is the format:
+If you are planning to clone this module and host it in your own environment you can add or remove mappings in your cloned repository. Mapping is defined in the `job-roles.tf` file in a local variable `predefined_iam_role_bindings`. You can add or remove job functions or GCP roles from a job function. Here is the format:
 
 ```terraform
-  central_iam_role_bindings = {
+  predefined_iam_role_bindings = {
     "job-1" = [
       "roles/iam.serviceAccountAdmin",
       "roles/cloudsupport.techSupportViewer",
@@ -115,7 +115,7 @@ Mapping is defined in the `job-roles.tf` file in a local variable `central_iam_r
 ### Example:
 
 ```terraform
-  central_iam_role_bindings = {
+  predefined_iam_role_bindings = {
     "dba" = [
       "roles/iam.serviceAccountAdmin",
       "roles/cloudsupport.techSupportViewer",
@@ -126,36 +126,3 @@ Mapping is defined in the `job-roles.tf` file in a local variable `central_iam_r
     ]
   }
 ```
-
-## Define Mapping
-
-Mapping is defined in the `job-roles.tf` file in a local variable `central_iam_role_bindings`. You can add or remove job functions or predefined roles from a job function. Here is the format:
-
-```terraform
-  central_iam_role_bindings = {
-    "job-1" = [
-      "roles/iam.serviceAccountAdmin",
-      "roles/cloudsupport.techSupportViewer",
-    ]
-    "job2" = [
-      "roles/dataflow.admin",
-      "roles/dataproc.admin",
-    ]
-  }
-```
-
-### Example:
-
-```terraform
-  central_iam_role_bindings = {
-    "dba" = [
-      "roles/iam.serviceAccountAdmin",
-      "roles/cloudsupport.techSupportViewer",
-    ]
-    "developer" = [
-      "roles/dataflow.admin",
-      "roles/dataproc.admin",
-    ]
-  }
-```
-
