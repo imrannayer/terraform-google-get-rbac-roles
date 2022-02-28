@@ -18,8 +18,8 @@ module "get_iam_bindings" {
   source                    = "../../"
   groups_users_roles_needed = var.groups_users_roles_needed
 
-  custom_iam_role_bindings = var.custom_iam_role_bindings
-  override_bindings        = var.override_bindings
+  custom_iam_job_functions = var.custom_iam_job_functions
+  override_job_functions   = var.override_job_functions
 }
 
 module "project_iam_bindings" {

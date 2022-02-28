@@ -20,7 +20,7 @@ module "get_iam_bindings" {
     "serviceAccount:delete-me-svc-acct-1@sinprj.iam.gserviceaccount.com"    = ["developer"]
   }
 
-  custom_iam_role_bindings = {
+  custom_iam_job_functions = {
     "sandbox" = [
       "roles/editor",
       "roles/iap.tunnelResourceAccessor",
@@ -29,7 +29,7 @@ module "get_iam_bindings" {
       "roles/editor",
     ]
   }
-  override_bindings = false
+  override_job_functions = false
 }
 ```
 
@@ -38,9 +38,9 @@ module "get_iam_bindings" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| custom\_iam\_role\_bindings | Map of list of predefined roles for job function | `map(list(string))` | `null` | no |
+| custom\_iam\_job\_functions | Map of list of GCP roles for job function. These custom job fnction will merge with predefined job functions in the module | `map(list(string))` | `null` | no |
 | groups\_users\_roles\_needed | Map of list of job function roles needed for groups or users | `map(list(string))` | `{}` | no |
-| override\_bindings | Overrides centralized binding with custom binding for matching job function | `bool` | `false` | no |
+| override\_job\_functions | Overrides predefined Job function in the module with custom job function for matching values | `bool` | `false` | no |
 
 ## Outputs
 
@@ -68,8 +68,8 @@ Here is an example input
   }
 ```
 
-## custom_iam_role_bindings
-Users can also pass values in `custom_iam_role_bindings` which is merged with `predefined_iam_role_bindings` before generating final bindings. It will allow users take advantage of formatting this module can perform. If a user passes `custom_iam_role_bindings` with job function(s) which are already present in `predefined_iam_role_bindings` it will override if the value of `override_bindings` is set to `true` otherwise the matching job function(s) will be ignored. In this example since the value of `override_bindings` is set to true, if `dba` or `sandbox` role is already present in `predefined_iam_role_bindings` it will be overridden. 
+## custom_iam_job_functions
+Users can also pass values in `custom_iam_job_functions` which is merged with `predefined_iam_job_function` before generating final bindings. It will allow users take advantage of formatting this module can perform. If a user passes `custom_iam_job_functions` with job function(s) which are already present in `predefined_iam_job_function` it will override if the value of `override_job_functions` is set to `true` otherwise the matching job function(s) will be ignored. In this example since the value of `override_job_functions` is set to true, if `dba` or `sandbox` role is already present in `predefined_iam_job_function` it will be overridden. 
 
 ```terraform
 module "get_iam_bindings" {
@@ -81,7 +81,7 @@ module "get_iam_bindings" {
     "group:test-grp-03@example.com" = ["viewer", "support"]
   }
 
-  custom_iam_role_bindings = {
+  custom_iam_job_functions = {
     "sandbox" = [
       "roles/editor",
       "roles/iap.tunnelResourceAccessor",
@@ -90,17 +90,17 @@ module "get_iam_bindings" {
       "roles/editor",
     ]
   }
-  override_bindings = true
+  override_job_functions = true
 }
 ```
 
 
 ## How to add or remove mapping in this module
 
-If you are planning to clone this module and host it in your own environment you can add or remove mappings in your cloned repository. Mapping is defined in the `job-roles.tf` file in a local variable `predefined_iam_role_bindings`. You can add or remove job functions or GCP roles from a job function. Here is the format:
+If you are planning to clone this module and host it in your own environment you can add or remove mappings in your cloned repository. Mapping is defined in the `job-roles.tf` file in a local variable `predefined_iam_job_function`. You can add or remove job functions or GCP roles from a job function. Here is the format:
 
 ```terraform
-  predefined_iam_role_bindings = {
+  predefined_iam_job_function = {
     "job-1" = [
       "roles/iam.serviceAccountAdmin",
       "roles/cloudsupport.techSupportViewer",
@@ -115,7 +115,7 @@ If you are planning to clone this module and host it in your own environment you
 ### Example:
 
 ```terraform
-  predefined_iam_role_bindings = {
+  predefined_iam_job_function = {
     "dba" = [
       "roles/iam.serviceAccountAdmin",
       "roles/cloudsupport.techSupportViewer",

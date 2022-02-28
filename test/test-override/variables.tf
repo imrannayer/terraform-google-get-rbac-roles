@@ -25,13 +25,13 @@ variable "groups_users_roles_needed" {
   default     = {}
 }
 
-variable "custom_iam_role_bindings" {
+variable "custom_iam_job_functions" {
   type        = map(list(string))
   description = "List of AD groups assigned restricted IAM admin role"
   default     = null
 }
 
-variable "override_bindings" {
+variable "override_job_functions" {
   type        = bool
   description = "Overrides centralized binding with custome bindings"
   default     = false

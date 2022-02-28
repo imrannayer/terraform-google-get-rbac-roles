@@ -20,14 +20,14 @@ variable "groups_users_roles_needed" {
   default     = {}
 }
 
-variable "custom_iam_role_bindings" {
+variable "custom_iam_job_functions" {
   type        = map(list(string))
-  description = "Map of list of predefined roles for job function"
+  description = "Map of list of GCP roles for job function. These custom job fnction will merge with predefined job functions in the module"
   default     = null
 }
 
-variable "override_bindings" {
+variable "override_job_functions" {
   type        = bool
-  description = "Overrides centralized binding with custom binding for matching job function"
+  description = "Overrides predefined Job function in the module with custom job function for matching values"
   default     = false
 }

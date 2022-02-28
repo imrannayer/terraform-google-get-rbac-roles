@@ -24,7 +24,7 @@ groups_users_roles_needed = {
   "group:test-grp-03@example.com" = ["viewer", "support"]
 }
 
-custom_iam_role_bindings = {
+custom_iam_job_function = {
   "sandbox" = [
     "roles/editor",
     "roles/iap.tunnelResourceAccessor",
@@ -34,4 +34,4 @@ custom_iam_role_bindings = {
   ]
 }
 
-override_bindings = true
+override_job_functions = true
