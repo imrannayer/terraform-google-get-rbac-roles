@@ -69,7 +69,7 @@ Here is an example input
 ```
 
 ## custom_iam_job_functions
-Users can also pass values in `custom_iam_job_functions` which is merged with `predefined_iam_job_functions` before generating final bindings. It will allow users take advantage of formatting this module can perform. If a user passes `custom_iam_job_functions` with job function(s) which are already present in `predefined_iam_job_functions` it will override if the value of `override_job_functions` is set to `true` otherwise the matching job function(s) will be ignored. In this example since the value of `override_job_functions` is set to true, if `dba` or `sandbox` job functions are already present in `predefined_iam_job_functions` it will be overridden. 
+Users can also pass their own job functions to GCP roles mapping in `custom_iam_job_functions` variable which is merged with `predefined_iam_job_functions` before generating final bindings. It will allow users take advantage of formatting this module can perform. If a user passes `custom_iam_job_functions` with job function(s) which are already present in `predefined_iam_job_functions` it will override the values if the value of `override_job_functions` is set to `true` otherwise the matching job function(s) will be ignored. In this example since the value of `override_job_functions` is set to true, if `dba` or `sandbox` job functions are already present in `predefined_iam_job_functions` it will be overridden. 
 
 ```terraform
 module "get_iam_bindings" {
