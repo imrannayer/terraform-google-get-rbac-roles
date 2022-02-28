@@ -16,10 +16,10 @@
 
 locals {
 
-  ## Merge custom_iam_job_functions and predefined_iam_job_function. 
-  ## override_job_functions set to true will will override any matching values in predefined_iam_job_function with custom_iam_job_functions values.
+  ## Merge custom_iam_job_functions and predefined_iam_job_functions. 
+  ## override_job_functions set to true will will override any matching values in predefined_iam_job_functions with custom_iam_job_functions values.
 
-  merged_iam_role_bindings = var.override_job_functions ? merge(local.predefined_iam_job_function, var.custom_iam_job_functions) : merge(var.custom_iam_job_functions, local.predefined_iam_job_function)
+  merged_iam_role_bindings = var.override_job_functions ? merge(local.predefined_iam_job_functions, var.custom_iam_job_functions) : merge(var.custom_iam_job_functions, local.predefined_iam_job_functions)
 
 
   ## Create a map of job function for group/user 

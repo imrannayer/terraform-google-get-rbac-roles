@@ -2,7 +2,7 @@
 Copyright 2021 Google LLC. This software is provided as-is, without warranty or representation for any use or purpose. Your use of it is subject to your agreement with Google.
 
 # Get Job Function Roles Module
-This module takes a map of job functions for groups/users/service accounts and returns bindings in format which can be passed to [GCP IAM modules](https://github.com/terraform-google-modules/terraform-google-iam). Module does not create any resource. It is used to centrally manage job functions to Predefined role mapping and generate bindings as output.
+This module takes a map of job functions for groups/users/service accounts and returns bindings in format which can be passed to [GCP IAM modules](https://github.com/terraform-google-modules/terraform-google-iam). Module does not create any resource. It is used to centrally manage job functions to GCP roles mapping and generate bindings as output.
 
 ## Compatibility
 This code is intended for use with Terraform 0.14 or higher.
@@ -53,7 +53,7 @@ module "get_iam_bindings" {
 ![get-job-function-roles module](get-job-function-roles.png)
 
 ## group_user_roles_needed
-When this module is called from the root module input is provided in `groups_users_roles_needed` as key value pairs. Key is `group:group-email`, `user:user-email` or `serviceAccount:service-account-email`. Value is the list of job functions defined in this module. You can pass 1 or more job functions for each group, user or service account.
+When this module is called from the root module input is provided in `groups_users_roles_needed` as key value pairs. Key can be `group:group-email`, `user:user-email` or `serviceAccount:service-account-email`. Value contains the list of job functions which are defined in this module or passed in `custom_iam_job_functions`. You can pass 1 or more job functions for each group, user or service account.
 
 
 Here is an example input
@@ -69,7 +69,7 @@ Here is an example input
 ```
 
 ## custom_iam_job_functions
-Users can also pass values in `custom_iam_job_functions` which is merged with `predefined_iam_job_function` before generating final bindings. It will allow users take advantage of formatting this module can perform. If a user passes `custom_iam_job_functions` with job function(s) which are already present in `predefined_iam_job_function` it will override if the value of `override_job_functions` is set to `true` otherwise the matching job function(s) will be ignored. In this example since the value of `override_job_functions` is set to true, if `dba` or `sandbox` role is already present in `predefined_iam_job_function` it will be overridden. 
+Users can also pass values in `custom_iam_job_functions` which is merged with `predefined_iam_job_functions` before generating final bindings. It will allow users take advantage of formatting this module can perform. If a user passes `custom_iam_job_functions` with job function(s) which are already present in `predefined_iam_job_functions` it will override if the value of `override_job_functions` is set to `true` otherwise the matching job function(s) will be ignored. In this example since the value of `override_job_functions` is set to true, if `dba` or `sandbox` job functions are already present in `predefined_iam_job_functions` it will be overridden. 
 
 ```terraform
 module "get_iam_bindings" {
@@ -97,10 +97,10 @@ module "get_iam_bindings" {
 
 ## How to add or remove mapping in this module
 
-If you are planning to clone this module and host it in your own environment you can add or remove mappings in your cloned repository. Mapping is defined in the `job-roles.tf` file in a local variable `predefined_iam_job_function`. You can add or remove job functions or GCP roles from a job function. Here is the format:
+If you are planning to clone this module and host it in your own environment you can add or remove mappings in your cloned repository. Mapping is defined in the `job-roles.tf` file in a local variable `predefined_iam_job_functions`. You can add or remove job functions or GCP roles from a job function. Here is the format:
 
 ```terraform
-  predefined_iam_job_function = {
+  predefined_iam_job_functions = {
     "job-1" = [
       "roles/iam.serviceAccountAdmin",
       "roles/cloudsupport.techSupportViewer",
@@ -115,7 +115,7 @@ If you are planning to clone this module and host it in your own environment you
 ### Example:
 
 ```terraform
-  predefined_iam_job_function = {
+  predefined_iam_job_functions = {
     "dba" = [
       "roles/iam.serviceAccountAdmin",
       "roles/cloudsupport.techSupportViewer",

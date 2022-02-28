@@ -16,7 +16,7 @@
 
 locals {
 
-  predefined_iam_job_function = {
+  predefined_iam_job_functions = {
     "support" = [
       "roles/iam.serviceAccountAdmin",
       "roles/cloudsupport.techSupportViewer",
