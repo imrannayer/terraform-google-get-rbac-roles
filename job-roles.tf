@@ -22,7 +22,7 @@ locals {
       "roles/cloudsupport.techSupportViewer",
       "roles/bigquery.user",
     ]
-    "databaseadministrator" = [
+    "dba" = [
       "roles/dataflow.admin",
       "roles/dataproc.admin",
       "roles/composer.admin",
