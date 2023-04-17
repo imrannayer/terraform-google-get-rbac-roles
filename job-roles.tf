@@ -21,6 +21,7 @@ locals {
       "roles/iam.serviceAccountAdmin",
       "roles/cloudsupport.techSupportViewer",
       "roles/bigquery.user",
+      "roles/storage.objectViewer",
     ]
     "dba" = [
       "roles/dataflow.admin",
