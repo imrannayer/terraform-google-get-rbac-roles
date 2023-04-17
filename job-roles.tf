@@ -18,7 +18,6 @@ locals {
 
   predefined_iam_job_functions = {
     "cloudoperations" = [
-      "roles/iam.serviceAccountAdmin",
       "roles/cloudsupport.techSupportViewer",
       "roles/bigquery.user",
       "roles/storage.objectViewer",
@@ -28,7 +27,7 @@ locals {
       "roles/composer.admin",
       "roles/storage.objectViewer",
       "roles/bigquery.user",
-      "roles/dataflow.developer",
+      # "roles/dataflow.developer",
     ]
     "developer" = [
       "roles/dataflow.developer",
