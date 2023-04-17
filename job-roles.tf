@@ -17,11 +17,12 @@
 locals {
 
   predefined_iam_job_functions = {
-    "support" = [
+    "cloudoperations" = [
       "roles/iam.serviceAccountAdmin",
       "roles/cloudsupport.techSupportViewer",
+      "roles/bigquery.user",
     ]
-    "dba" = [
+    "databaseadministrator" = [
       "roles/dataflow.admin",
       "roles/dataproc.admin",
       "roles/composer.admin",
