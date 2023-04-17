@@ -40,7 +40,6 @@ locals {
     "viewer" = [
       "roles/dataflow.viewer",
       "roles/dataproc.viewer",
-      "roles/composer.user",
       "roles/storage.objectViewer",
     ]
   }
