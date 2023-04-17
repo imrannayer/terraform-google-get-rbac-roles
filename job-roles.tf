@@ -27,7 +27,7 @@ locals {
       "roles/composer.admin",
       "roles/storage.objectViewer",
       "roles/bigquery.user",
-      # "roles/dataflow.developer",
+      "roles/dataflow.developer",
     ]
     "developer" = [
       "roles/dataflow.developer",
