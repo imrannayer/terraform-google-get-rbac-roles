@@ -1,7 +1,7 @@
 # License  
 Copyright 2021 Google LLC. This software is provided as-is, without warranty or representation for any use or purpose. Your use of it is subject to your agreement with Google.
 
-# Get Persona Roles Module
+# Get RBAC Roles Module
 This module takes a map of job functions for groups/users/service accounts and returns bindings in format which can be passed to [GCP IAM modules](https://github.com/terraform-google-modules/terraform-google-iam). Module does not create any resource. It is used to centrally manage job functions to GCP roles mapping and generate bindings as output.
 
 ## Compatibility
